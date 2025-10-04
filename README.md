@@ -7,7 +7,7 @@ It supports both **local execution** and **Docker-based execution** with Seleniu
 
 ## 🛠️ Tech Stack
 - Java 17
-- Maven
+- Maven 3.8.5
 - Selenium 4
 - TestNG
 - ExtentReports
@@ -43,7 +43,7 @@ Install dependencies
 
 Java 17
 
-Maven
+Maven 3.8.5
 
 Chrome / Edge browsers
 
