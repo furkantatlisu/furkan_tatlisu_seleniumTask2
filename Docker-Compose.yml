@@ -18,3 +18,4 @@ services:
     - ./reports:/app/reports
     - ./target:/app/target
     tty: true
+    
