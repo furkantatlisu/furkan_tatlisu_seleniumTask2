@@ -18,6 +18,7 @@ import org.testng.annotations.BeforeSuite;
 import utils.ConfigReader;
 import utils.DriverFactory;
 
+import java.io.File;
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -33,13 +34,30 @@ public class BaseTest {
 
     @BeforeSuite
     public void setUpSuite() {
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        ExtentSparkReporter sparkReporter = new ExtentSparkReporter("reports/InsiderTestReport_" + timeStamp + ".html");
-        extent = new ExtentReports();
-        extent.attachReporter(sparkReporter);
+        try {
+            File reportsDir = new File("reports");
+            if (!reportsDir.exists()) {
+                boolean created = reportsDir.mkdirs();
+                logger.info("Reports directory created: {}", created);
+            }
 
-        sparkReporter.config().setDocumentTitle("Insider Careers Test Report");
-        sparkReporter.config().setReportName("Automation Test Results");
+            String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+            String reportPath = "reports/InsiderTestReport_" + timeStamp + ".html";
+
+            logger.info("Creating report at: {}", new File(reportPath).getAbsolutePath());
+
+            ExtentSparkReporter sparkReporter = new ExtentSparkReporter(reportPath);
+            extent = new ExtentReports();
+            extent.attachReporter(sparkReporter);
+
+            sparkReporter.config().setDocumentTitle("Insider Careers Test Report");
+            sparkReporter.config().setReportName("Automation Test Results");
+
+            logger.info("Extent Reports configured successfully");
+
+        } catch (Exception e) {
+            logger.error("Failed to setup Extent Reports: {}", e.getMessage(), e);
+        }
     }
 
     @BeforeMethod

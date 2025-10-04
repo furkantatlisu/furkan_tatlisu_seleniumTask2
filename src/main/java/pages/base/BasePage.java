@@ -25,7 +25,7 @@ public class BasePage {
         try {
             return wait.until(ExpectedConditions.presenceOfElementLocated(locator));
         } catch (Exception e) {
-            logger.error("Element not found: " + locator, e);
+            logger.error("Element not found: {}", locator, e);
             throw e;
         }
     }
@@ -34,7 +34,7 @@ public class BasePage {
         try {
             return wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(locator));
         } catch (Exception e) {
-            logger.error("Elements not found: " + locator, e);
+            logger.error("Elements not found: {}", locator, e);
             throw e;
         }
     }
@@ -43,9 +43,9 @@ public class BasePage {
         try {
             WebElement element = wait.until(ExpectedConditions.elementToBeClickable(locator));
             element.click();
-            logger.info("Clicked element: " + locator);
+            logger.info("Clicked element: {}", locator);
         } catch (Exception e) {
-            logger.error("Failed to click element: " + locator, e);
+            logger.error("Failed to click element: {}", locator, e);
             throw e;
         }
     }
@@ -55,9 +55,9 @@ public class BasePage {
             WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
             element.clear();
             element.sendKeys(text);
-            logger.info("Entered text '" + text + "' into element: " + locator);
+            logger.info("Entered text '{}' into element: {}", text, locator);
         } catch (Exception e) {
-            logger.error("Failed to enter text into element: " + locator, e);
+            logger.error("Failed to enter text into element: {}", locator, e);
             throw e;
         }
     }
@@ -76,7 +76,7 @@ public class BasePage {
             WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
             return element.getText();
         } catch (Exception e) {
-            logger.error("Failed to get text from element: " + locator, e);
+            logger.error("Failed to get text from element: {}", locator, e);
             throw e;
         }
     }
@@ -90,9 +90,9 @@ public class BasePage {
             String optionXpath = String.format("//li[contains(@class, 'select2-results__option') and normalize-space(text())='%s']", visibleText);
             WebElement option = dropdown.findElement(By.xpath(optionXpath));
             option.click();
-            logger.info("Selected '" + visibleText + "' from dropdown: " + locator);
+            logger.info("Selected '{}' from dropdown: {}", visibleText, locator);
         } catch (Exception e) {
-            logger.error("Failed to select from dropdown: " + locator, e);
+            logger.error("Failed to select from dropdown: {}", locator, e);
             throw e;
         }
     }
@@ -110,9 +110,9 @@ public class BasePage {
         try {
             WebElement element = findElement(locator);
             scrollToElement(element);
-            logger.info("Scrolled to element: " + locator);
+            logger.info("Scrolled to element: {}", locator);
         } catch (Exception e) {
-            logger.error("Failed to scroll to element: " + locator, e);
+            logger.error("Failed to scroll to element: {}", locator, e);
             throw e;
         }
     }
@@ -135,13 +135,9 @@ public class BasePage {
     }
 
     protected void hoverOverElement(By locator) {
-        try {
             WebElement element = findElement(locator);
             hoverOverElement(element);
-        } catch (Exception e) {
-            logger.error("Hover over element failed: {}", e.getMessage());
-            throw e;
-        }
+
     }
 
     protected void hoverOverElement(WebElement element) {
