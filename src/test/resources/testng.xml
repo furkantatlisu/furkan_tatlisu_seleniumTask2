@@ -4,6 +4,7 @@
     <test name="Careers Functionality Test">
         <classes>
             <class name="tests.CareersTest"/>
+            <class name="tests.BaseTest"/>
         </classes>
     </test>
 </suite>

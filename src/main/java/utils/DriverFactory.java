@@ -66,7 +66,7 @@ public class DriverFactory {
 
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
             driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
-            logger.info("{} driver initialized successfully (remote={})", b, remoteUrl != null);
+            logger.info(b + " driver initialized successfully (remote=" + (remoteUrl != null) + ")");
         } catch (Exception e) {
             logger.error("Failed to initialize driver", e);
             throw new RuntimeException("Driver initialization failed", e);
