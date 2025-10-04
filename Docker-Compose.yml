@@ -9,6 +9,7 @@ services:
 
   test-runner:
     build: .
+    container_name: selenium-tests
     depends_on:
       - selenium-chrome
     environment:
@@ -16,6 +17,7 @@ services:
       - BROWSER=chrome
     volumes:
     - ./reports:/app/reports
-    - ./target:/app/target
-    tty: true
+    - ./logs:/app/logs
+    - ./post_test.sh:/app/post_test.sh  # script to open the report automatically
+    command: ["/bin/bash", "-c", "mvn test && chmod +x /app/post_test.sh && /app/post_test.sh"]
     
