@@ -65,20 +65,35 @@ ExtentReports → reports/
 TestNG default → target/surefire-reports
 
 ## 🐳 Running Tests with Docker
-This setup uses Selenium standalone Chrome inside Docker.
+This setup runs Selenium + TestNG + ExtentReports tests inside Docker containers.
 
-### 1. Build & run everything
+### 1. First build and run tests
 ```
 docker-compose up --build --exit-code-from test-runner --abort-on-container-exit
 ```
+First run may take some time as Maven dependencies are downloaded.
 
+ExtentReports HTML report is generated in reports/
+Logs is generated in logs/
 
-### 3. Reports in Docker
+### 2. Re-run tests (if containers are already built)
+```
+docker-compose run --rm tests
+```
+### 3. Viewing Tests on Localhost
+The selenium-chrome container is not headless and supports VNC.
+
+Selenium Grid UI: http://localhost:4444
+
+To watch Chrome in real time: Click the camera icon (VNC) in the Grid UI.
+```
+Username: selenium
+Password: secret
+```
+### 4. Reports in Docker
 Reports are saved to mounted volumes:
 
 ExtentReports → ./reports/InsiderTestReport_<timestamp>.html
-
-TestNG reports → ./target/surefire-reports
 
 
 

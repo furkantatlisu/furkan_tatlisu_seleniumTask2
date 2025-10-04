@@ -21,7 +21,7 @@ public class DriverFactory {
 
     public static WebDriver getDriver(String browser) {
         WebDriver driver;
-        String remoteUrl = System.getenv("SELENIUM_REMOTE_URL"); // örn: http://selenium-chrome:4444/wd/hub
+        String remoteUrl = System.getenv("SELENIUM_REMOTE_URL"); // exp: http://selenium-chrome:4444/wd/hub
 
         try {
             String b = browser == null ? System.getProperty("browser", "chrome") : browser;
