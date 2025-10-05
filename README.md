@@ -2,7 +2,30 @@
 
 This project contains automated tests for **Insider Careers** using **Selenium**, **TestNG**, and **ExtentReports**.  
 It supports both **local execution** and **Docker-based execution** with Selenium containers.
+---
+##🧩 Clone & Setup
+### 1️⃣ Clone the repository
+git clone https://github.com/furkantatlisu/furkan_tatlisu_seleniumTask2.git
 
+cd furkan_tatlisu_seleniumTask2
+
+###2️⃣ Verify Java & Maven installation
+java -version
+
+mvn -version
+
+
+Ensure:
+
+**Java 17** or higher
+
+**Maven 3.8.5** or higher
+
+### 3️⃣ (Optional) Install Docker if you plan to run inside containers
+
+Install Docker Desktop
+
+Start Docker service before running tests
 ---
 
 ## 🛠️ Tech Stack
@@ -37,9 +60,9 @@ browser=chrome
 timeout=20
 qualityAssurance.url=https://useinsider.com/careers/quality-assurance/
 ```
-
+---
 ## ▶️ Running Tests Locally
-Install dependencies
+Make sure you have:
 
 Java 17
 
@@ -65,6 +88,7 @@ ExtentReports → reports/
 
 TestNG default → target/surefire-reports
 
+---
 ## 🐳 Running Tests with Docker
 This setup runs Selenium + TestNG + ExtentReports tests inside Docker containers.
 
