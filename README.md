@@ -3,7 +3,7 @@
 This project contains automated tests for **Insider Careers** using **Selenium**, **TestNG**, and **ExtentReports**.  
 It supports both **local execution** and **Docker-based execution** with Selenium containers.
 ---
-##🧩 Clone & Setup
+## 🧩 Clone & Setup
 ### 1️⃣ Clone the repository
 git clone https://github.com/furkantatlisu/furkan_tatlisu_seleniumTask2.git
 
