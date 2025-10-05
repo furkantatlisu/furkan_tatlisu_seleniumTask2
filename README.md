@@ -43,7 +43,7 @@ Start Docker service before running tests
 - `src/test/java/tests/` → BaseTest and test classes
 - `src/main/java/utils/` → DriverFactory, ConfigReader, utilities
 - `src/test/resources/config.properties` → Test configuration
-- `reports/` → ExtentReports output (HTML)
+- `reports/` → ExtentReports output (HTML) + Screenshots
 - `pom.xml` → Maven dependencies & build config
 - `Dockerfile` → Test runner container definition
 - `docker-compose.yml` → Selenium + test runner setup
@@ -84,9 +84,10 @@ mvn clean test -Dbrowser=firefox
 ```
 ### Reports
 
-ExtentReports → reports/
+`ExtentReports → ./reports/InsiderTestReport_<timestamp>.html`
 
-TestNG default → target/surefire-reports
+`Screenshots → reports/screenshots/testInsiderFunctionality_<timestamp>.png`
+
 
 ---
 ## 🐳 Running Tests with Docker
@@ -117,9 +118,9 @@ Username: selenium
 Password: secret
 ```
 ### 4. Reports in Docker
-Reports are saved to mounted volumes:
+`ExtentReports → ./reports/InsiderTestReport_<timestamp>.html`
 
-ExtentReports → ./reports/InsiderTestReport_<timestamp>.html
+`Screenshots → reports/screenshots/testInsiderFunctionality_<timestamp>.png`
 
 
 
