@@ -47,7 +47,7 @@ Maven 3.8.5
 
 Chrome / Edge browsers
 
-Run all tests
+Run all tests with default browser
 
 ```
 mvn clean test
@@ -56,7 +56,8 @@ mvn clean test
 Run with a specific browser
 ```
 mvn clean test -Dbrowser=chrome
-
+mvn clean test -Dbrowser=edge
+mvn clean test -Dbrowser=firefox
 ```
 ### Reports
 
@@ -73,12 +74,13 @@ docker-compose up --build --exit-code-from test-runner --abort-on-container-exit
 ```
 First run may take some time as Maven dependencies are downloaded.
 
-ExtentReports HTML report is generated in reports/
-Logs is generated in logs/
+ExtentReports HTML report is generated in ./reports/
+
+Logs is generated in ./logs/
 
 ### 2. Re-run tests (if containers are already built)
 ```
-docker-compose run --rm tests
+docker-compose run --rm test-runner
 ```
 ### 3. Viewing Tests on Localhost
 The selenium-chrome container is not headless and supports VNC.

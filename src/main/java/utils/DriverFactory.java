@@ -12,24 +12,39 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.net.URL;
 import java.time.Duration;
+import java.util.Arrays;
+import java.util.List;
 
 
 public class DriverFactory {
 
     private static System LogManager;
     protected static final Logger logger = org.apache.logging.log4j.LogManager.getLogger(DriverFactory.class);
-
+    private static final List<String> COMMON_ARGUMENTS = Arrays.asList(
+            "--ignore-certificate-errors",
+            "--disable-popup-blocking",
+            "--start-maximized",
+            "--disable-notifications",
+            "--disable-gpu",
+            "--no-sandbox",
+            "--disable-dev-shm-usage",
+            "--disable-blink-features=AutomationControlled",
+            "--disable-extensions",
+            "--disable-plugins",
+            "--dns-prefetch-disable",
+            "--incognito"  // Chrome, Edge ve Firefox'ta çalışır
+    );
     public static WebDriver getDriver(String browser) {
         WebDriver driver;
         String remoteUrl = System.getenv("SELENIUM_REMOTE_URL"); // exp: http://selenium-chrome:4444/wd/hub
+
 
         try {
             String b = browser == null ? System.getProperty("browser", "chrome") : browser;
             switch (b.toLowerCase()) {
                 case "chrome":
                     ChromeOptions chromeOptions = new ChromeOptions();
-                    chromeOptions.addArguments("--incognito","--ignore-certificate-errors", "--disable-popup-blocking",
-                            "--disable-gpu","--start-maximized","--disable-plugins","--disable-notifications","--dns-prefetch-disable");
+                    COMMON_ARGUMENTS.forEach(chromeOptions::addArguments);
                     chromeOptions.setAcceptInsecureCerts(true);
                     if (remoteUrl != null && !remoteUrl.isEmpty()) {
                         driver = new RemoteWebDriver(new URL(remoteUrl), chromeOptions);
@@ -40,7 +55,7 @@ public class DriverFactory {
 
                 case "edge":
                     EdgeOptions edgeOptions = new EdgeOptions();
-                    edgeOptions.addArguments("--ignore-certificate-errors","--disable-popup-blocking","--start-maximized");
+                    COMMON_ARGUMENTS.forEach(edgeOptions::addArguments);
                     edgeOptions.setAcceptInsecureCerts(true);
                     if (remoteUrl != null && !remoteUrl.isEmpty()) {
                         driver = new RemoteWebDriver(new URL(remoteUrl), edgeOptions);
@@ -51,7 +66,7 @@ public class DriverFactory {
 
                 case "firefox":
                     FirefoxOptions firefoxOptions = new FirefoxOptions();
-                    firefoxOptions.addArguments("--ignore-certificate-errors","--disable-popup-blocking","--start-maximized");
+                    COMMON_ARGUMENTS.forEach(firefoxOptions::addArguments);
                     firefoxOptions.setAcceptInsecureCerts(true);
                     if (remoteUrl != null && !remoteUrl.isEmpty()) {
                         driver = new RemoteWebDriver(new URL(remoteUrl), firefoxOptions);
